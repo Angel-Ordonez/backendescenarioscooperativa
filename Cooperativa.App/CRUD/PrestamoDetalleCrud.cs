@@ -259,6 +259,7 @@ namespace Cooperativa.App.CRUD
 
 
 
+
                         var newDetalle = PrestamoDetalle.New(numeroCouta + 1, capitalAPagar, interesAPagar, capitalAPagar + interesAPagar, restaCapital, fechaPago, /*obsevacion*/ command.Observacion, prestamo.Id, cliente.Id, command.CuentaBancariaOrigenId, createdBy);
                         newDetalle.Moneda = prestamo.Moneda;
                         newDetalle.ProximoPago = proximoPago;
