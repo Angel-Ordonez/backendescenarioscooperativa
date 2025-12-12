@@ -125,6 +125,14 @@ namespace Cooperativa.App.CRUD
                         cuentaOrigen.ThrowIfNull($"No se encontro cuenta Origen");
 
 
+                        if (cuentaOrigen.NumeroCuenta.ToLower() != "efectivo" || cuentaOrigen.NumeroCuenta.ToLower() != "efectivo")
+                        {
+                            if (command.ReferenciaBancaria == null || command.ReferenciaBancaria.Length < 1)
+                            {
+                                throw new Exception("Se requiere Referencia Bancaria del pago");
+                            }
+                        }
+
                         var configuracion = await _context.ConfiguracionPrestamo.Where(x => !x.IsSoftDeleted).AsNoTracking().FirstOrDefaultAsync();
                         //var cuentaBancaria = await _context.CuentaBancaria.Where(x => x.Id == command.CuentaBancariaId && !x.IsSoftDeleted && x.Enabled).FirstOrDefaultAsync();
                         //if (cuentaBancaria == null) { return AppResult.New(false, "Cuenta Bancaria no valida"); }

@@ -46,6 +46,13 @@ namespace Cooperativa.Controllers
             return Ok(res);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> IndexSoloPrestamos([FromQuery] PrestamoCrud.IndexSoloPrestamos.QueryPrestamosIndex query)
+        {
+            var res = await _mediator.Send(query);
+            return Ok(res);
+        }
+
         [HttpPost]
         public async Task<IActionResult> GetByFiltros([FromBody] PrestamoCrud.GetByFiltros.QueryPrestamosByFiltros command)
         {

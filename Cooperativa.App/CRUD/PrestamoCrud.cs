@@ -1427,6 +1427,33 @@ namespace Cooperativa.App.CRUD
 
 
 
+        public class IndexSoloPrestamos
+        {
+            public class QueryPrestamosIndex : IRequest<List<PrestamoDto>>
+            {
+
+            }
+            public class QueryPrestamosIndexHandler : IRequestHandler<QueryPrestamosIndex, List<PrestamoDto>>
+            {
+                private readonly CooperativaDbContext _context;
+
+                public QueryPrestamosIndexHandler(CooperativaDbContext context)
+                {
+                    _context = context;
+                }
+                public async Task<List<PrestamoDto>> Handle(QueryPrestamosIndex query, CancellationToken cancellationToken)
+                {
+                    var prestamos = await _context.Prestamo.Where(x => !x.IsSoftDeleted)
+                        .AsNoTracking()
+                        .ProjectToType<PrestamoDto>()
+                        .ToListAsync();
+
+                    return prestamos;
+                }
+            }
+        }
+
+
 
         public class GetByFiltros
         {
